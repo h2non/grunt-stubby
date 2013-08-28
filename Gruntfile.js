@@ -39,7 +39,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'mocks': [ 'test/fixtures/users.json', 'test/fixtures/places.json' ]
+          'mocks': [ 'test/fixtures/*.json' ]
         }
       }
     },
