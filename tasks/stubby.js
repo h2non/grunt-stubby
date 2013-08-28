@@ -48,7 +48,7 @@ module.exports = function (grunt) {
       }).map(function (filepath) {
         var data;
         // Read file source.
-        // TODO: get base path for 
+        // TODO: set absolute base path for response files
         if (/.json$/g.test(filepath)) {
           data = grunt.file.readJSON(filepath);
         } else {
