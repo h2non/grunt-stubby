@@ -30,22 +30,18 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     stubby: {
-      default_options: {
+      mockServer: {
         options: {
+          server: {
+            stubs: 8000,
+            tls: 8443,
+            admin: 8001
+          }
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+          'mocks': [ 'test/fixtures/users.json', 'test/fixtures/places.json' ]
+        }
+      }
     },
 
     // Unit tests.

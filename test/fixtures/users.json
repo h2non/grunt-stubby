@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "url": "^/path/to/users",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "post": null, 
+      "method": "GET"
+    }, 
+    "response": {
+      "status": 200, 
+      "headers": {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "latency": 500,
+      "body": "{ \"status\": \"ok\" }"
+    }
+  }, 
+  {
+    "request": {
+      "url": "^/path/to/users", 
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "post": "test body data", 
+      "method": "POST"
+    }, 
+    "response": {
+      "status": 200, 
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{ \"status\": \"ok\" }"
+    }
+  }
+]
