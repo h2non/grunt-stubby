@@ -1,0 +1,47 @@
+{
+  "name": "grunt-stubby",
+  "description": "A Grunt plugin for configuring on-the-fly Stubby server based on YAML/JSON files",
+  "version": "0.1.0",
+  "homepage": "https://github.com/h2non/grunt-stubby",
+  "author": {
+    "name": "Tomas Aparicio",
+    "email": "tomas@aparicio.me",
+    "url": "http://tomas.aparicio.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/h2non/grunt-stubby.git"
+  },
+  "bugs": {
+    "url": "https://github.com/h2non/grunt-stubby/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/h2non/grunt-stubby/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "stubby": "~0.2.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin",
+    "stubby"
+  ]
+}
