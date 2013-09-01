@@ -1,6 +1,10 @@
 # Grunt Stubby
 
+[![Build Status](https://travis-ci.org/h2non/grunt-stubby.png)](https://travis-ci.org/h2non/grunt-stubby)
+
 > A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) server based on YAML/JSON configuration files
+
+
 
 ## Getting Started
 
