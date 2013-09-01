@@ -39,14 +39,14 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'mocks': [ 'test/fixtures/*.json' ]
+          '.': [ 'test/fixtures/*.{json,yaml}']
         }
       }
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js'],
+      tests: ['test/*Test.js'],
     },
 
   });

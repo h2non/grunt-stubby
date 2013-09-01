@@ -70,19 +70,20 @@ module.exports = function (grunt) {
     // start stubby server
     stubbyServer.start(options.server, function (error) {
       if (error) {
-        grunt.log.warn('Stubby starting error: "' + error);
+        grunt.log.error('Stubby starting error: "' + error);
+        done();
         return;
       }
 
       if (_.isFunction(options.callback)) {
-        options.callback(options);
+        options.callback(stubbyServer, options);
       }
 
-      grunt.log.writeln('Stubs HTTP server listening on port ' + options.server.stubs);
-      grunt.log.writeln('Stubs HTTPS server listening on port ' + options.server.tls);
+      grunt.log.writeln('Stubby HTTP server listening on port ' + options.server.stubs);
+      grunt.log.writeln('Stubby HTTPS server listening on port ' + options.server.tls);
       grunt.log.writeln('Admin server listening on port ' + options.server.admin);
 
-      setTimeout(done, 20000);
+      done();
 
     });
 
