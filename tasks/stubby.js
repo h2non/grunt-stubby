@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     return array;
   }
 
-  grunt.registerMultiTask('stubby', 'A Grunt plugin for configuring on-the-fly Stubby server based on YAML/JSON files', function () {
+  grunt.registerMultiTask('stubby', 'A Grunt plugin for setting up a Stubby server based on YAML/JSON configuration files', function () {
     var stubbyServer = new Stubby();
     var done = this.async();
 
