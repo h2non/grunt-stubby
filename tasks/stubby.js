@@ -19,25 +19,24 @@ module.exports = function (grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      basePath: '.',
       callback: null, // takes one parameter: the error message (if there is one), undefined otherwise
-      server: {
-        stubs: 8882, // port number to run the stubs portal
-        admin: 8889, // port number to run the admin portal
-        tls: 7443, // port number to run the stubs portal over https
-        data: null, // JavaScript Object/Array containing endpoint data
-        location: 'localhost', // address/hostname at which to run stubby
-        key: null, // keyfile contents (in PEM format)
-        cert: null, // certificate file contents (in PEM format)
-        pfx: null, // pfx file contents (mutually exclusive with key/cert options)
-        watch: null, // filename to monitor and load as stubby's data when changes occur,
-        mute: true // defaults to true. Pass in false to have console output (if available),
-      }
+      stubs: 8882, // port number to run the stubs portal
+      admin: 8889, // port number to run the admin portal
+      tls: 7443, // port number to run the stubs portal over https
+      data: null, // JavaScript Object/Array containing endpoint data
+      location: 'localhost', // address/hostname at which to run stubby
+      key: null, // keyfile contents (in PEM format)
+      cert: null, // certificate file contents (in PEM format)
+      pfx: null, // pfx file contents (mutually exclusive with key/cert options)
+      watch: null, // filename to monitor and load as stubby's data when changes occur
+      mute: true // defaults to true. Pass in false to have console output (if available)
     });
 
     // Iterate over all specified file groups.
     var data = _.union.apply(_, this.files.map(function (f) {
       // Concat specified files.
+
+      console.log(f);
       var mocks = _.union.apply(_, f.src.filter(function (filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
@@ -65,12 +64,20 @@ module.exports = function (grunt) {
       return mocks;
     }));
 
-    options.server.data = data;
+    if (_.isObject(options.data)) {
+      if (_.isArray(options.data)) {
+        options.data = _.union(options.data, data);
+      } else {
+        options.data = data.push(options.data);
+      }
+    } else {
+      options.data = data;
+    }
 
     // start stubby server
-    stubbyServer.start(options.server, function (error) {
+    stubbyServer.start(_.omit(options, 'callback'), function (error) {
       if (error) {
-        grunt.log.error('Stubby starting error: "' + error);
+        grunt.log.error('Stubby error: "' + error.message);
         done();
         return;
       }
@@ -79,9 +86,9 @@ module.exports = function (grunt) {
         options.callback(stubbyServer, options);
       }
 
-      grunt.log.writeln('Stubby HTTP server listening on port ' + options.server.stubs);
-      grunt.log.writeln('Stubby HTTPS server listening on port ' + options.server.tls);
-      grunt.log.writeln('Admin server listening on port ' + options.server.admin);
+      grunt.log.writeln('Stubby HTTP server listening on port ' + options.stubs);
+      grunt.log.writeln('Stubby HTTPS server listening on port ' + options.tls);
+      grunt.log.writeln('Admin server listening on port ' + options.admin);
 
       done();
 
