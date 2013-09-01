@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Grunt-stubby by h2non</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Grunt-stubby</h1>
+        <h2>A Grunt plugin for setting up a Stubby server based on YAML/JSON configuration files</h2>
+        <a href="https://github.com/h2non/grunt-stubby" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="grunt-stubby" class="anchor" href="#grunt-stubby"><span class="octicon octicon-link"></span></a>Grunt Stubby</h1>
+
+<blockquote>
+<p>A Grunt plugin for setting up a <a href="https://github.com/mrak/stubby4node">Stubby</a> server based on YAML/JSON configuration files</p>
+</blockquote>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>This plugin requires Grunt <code>~0.4.1</code></p>
+
+<p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
+
+<pre lang="shell"><code>npm install grunt-stubby --save-dev
+</code></pre>
+
+<p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-stubby'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="the-stubby-task" class="anchor" href="#the-stubby-task"><span class="octicon octicon-link"></span></a>The "stubby" task</h2>
+
+<h3>
+<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
+
+<h4>
+<a name="default-options" class="anchor" href="#default-options"><span class="octicon octicon-link"></span></a>Default Options</h4>
+
+<p>In this example, the default options are used to do something with whatever. </p>
+
+<p>By default</p>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">stubby</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">stubsServer</span><span class="o">:</span> <span class="p">{</span>
+      <span class="c1">// note the array collection instead of an object</span>
+      <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'mocks/*.{json,yaml}'</span> <span class="p">],</span>
+        <span class="nx">basePath</span><span class="o">:</span> <span class="s1">'test/'</span>
+      <span class="p">}]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4>
+<a name="custom-options" class="anchor" href="#custom-options"><span class="octicon octicon-link"></span></a>Custom Options</h4>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">stubby</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">stubsServer</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">server</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">server</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">endpoint</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span>
+             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">);</span>
+          <span class="p">});</span>
+        <span class="p">},</span>
+        <span class="nx">stubs</span><span class="o">:</span> <span class="mi">8000</span><span class="p">,</span>
+        <span class="nx">tls</span><span class="o">:</span> <span class="mi">8443</span><span class="p">,</span>
+        <span class="nx">admin</span><span class="o">:</span> <span class="mi">8010</span>
+      <span class="p">},</span>
+      <span class="c1">// note the array collection instead of an object</span>
+      <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'mocks/*.{json,yaml}'</span> <span class="p">],</span>
+        <span class="nx">basePath</span><span class="o">:</span> <span class="s1">'test/'</span>
+      <span class="p">}]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<h4>
+<a name="optionsstubs" class="anchor" href="#optionsstubs"><span class="octicon octicon-link"></span></a>options.stubs</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>8882</code></p>
+
+<p>Port number to run the stubs portal</p>
+
+<h4>
+<a name="optionstls" class="anchor" href="#optionstls"><span class="octicon octicon-link"></span></a>options.tls</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>7443</code></p>
+
+<p>Port number to run the stubs portal over https</p>
+
+<h4>
+<a name="optionsadmin" class="anchor" href="#optionsadmin"><span class="octicon octicon-link"></span></a>options.admin</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>8889</code></p>
+
+<p>Port number to run the admin portal</p>
+
+<h4>
+<a name="optionsdata" class="anchor" href="#optionsdata"><span class="octicon octicon-link"></span></a>options.data</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>null</code></p>
+
+<p>JavaScript Object/Array containing endpoint data. 
+This option will be automatically filled from the JSON/YAML config files, however you can additionally add a customized data</p>
+
+<h4>
+<a name="optionslocation" class="anchor" href="#optionslocation"><span class="octicon octicon-link"></span></a>options.location</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>localhost</code></p>
+
+<p>Address/hostname at which to run stubby</p>
+
+<h4>
+<a name="optionskey" class="anchor" href="#optionskey"><span class="octicon octicon-link"></span></a>options.key</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>null</code></p>
+
+<p>keyfile contents (in PEM format)</p>
+
+<h4>
+<a name="optionscert" class="anchor" href="#optionscert"><span class="octicon octicon-link"></span></a>options.cert</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>null</code></p>
+
+<p>Certificate file path contents (in PEM format)</p>
+
+<h4>
+<a name="optionspfx" class="anchor" href="#optionspfx"><span class="octicon octicon-link"></span></a>options.pfx</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>null</code></p>
+
+<p>Pfx file path contents (mutually exclusive with key/cert options)</p>
+
+<h4>
+<a name="optionswatch" class="anchor" href="#optionswatch"><span class="octicon octicon-link"></span></a>options.watch</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>null</code></p>
+
+<p>Filename to monitor and load as stubby's data when changes occur</p>
+
+<h4>
+<a name="optionsmute" class="anchor" href="#optionsmute"><span class="octicon octicon-link"></span></a>options.mute</h4>
+
+<p>Type: <code>Boolean</code>
+Default value: <code>true</code></p>
+
+<p>Pass in false to have console output (if available)</p>
+
+<h4>
+<a name="optionscallback" class="anchor" href="#optionscallback"><span class="octicon octicon-link"></span></a>options.callback</h4>
+
+<p>Type: <code>Function</code>
+Default value: <code>null</code></p>
+
+<p>Callback function when the server starts successfully. 
+The passed arguments are:</p>
+
+<ul>
+<li>
+<code>server</code> - The Stubby server instance object</li>
+<li>
+<code>options</code> - The server config options object</li>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. </p>
+
+<p>Add unit tests for any new or changed functionality. 
+Lint and test your code using <a href="http://gruntjs.com/">Grunt</a>.</p>
+
+<h3>
+<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>Testing</h3>
+
+<p>Clone the repository</p>
+
+<pre lang="shell"><code>$ git clone https://github.com/h2non/grunt-stubby.git &amp;&amp; cd grunt-stubby
+</code></pre>
+
+<p>Install dependencies</p>
+
+<pre lang="shell"><code>$ npm install
+</code></pre>
+
+<p>Run tests</p>
+
+<pre lang="shell"><code>$ npm test
+</code></pre>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+
+<ul>
+<li>
+<code>0.1.0</code> 02.09.2013
+
+<ul>
+<li>Initial release</li>
+</ul>
+</li>
+</ul><h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<p>You miss something? Open an issue or PR!</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Under <a href="https://github.com/h2non/grunt-stubby/">MIT</a> license</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/h2non/grunt-stubby/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/h2non/grunt-stubby/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/h2non/grunt-stubby"></a> is maintained by <a href="https://github.com/h2non">h2non</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
