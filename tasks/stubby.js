@@ -13,6 +13,35 @@ var Stubby = require('stubby').Stubby;
 module.exports = function (grunt) {
   var _ = grunt.util._;
 
+  // defines the absolute path for external static request/response 
+  // files that will be processed internally by Stubby
+  function setPathStaticFiles(basePath, array) {
+    array = array.map(function (object) {
+      if (_.isObject(object.request) && object.request.file) {
+        object.request.file = basePath + object.request.file;
+      }
+      if (_.isObject(object.response)) {
+        // support collections for responses
+        if (_.isArray(object.response)) {
+          object.response = object.response.map(function (response) {
+            if (response.file) {
+              response.file = basePath + response.file;
+            }
+            return response;
+          });
+        } else {
+          if (object.response.file) {
+            object.response.file = basePath + object.response.file;
+          }
+        }
+      }
+
+      return object;
+    });
+
+    return array;
+  }
+
   grunt.registerMultiTask('stubby', 'A Grunt plugin for configuring on-the-fly Stubby server based on YAML/JSON files', function () {
     var stubbyServer = new Stubby();
     var done = this.async();
@@ -34,10 +63,13 @@ module.exports = function (grunt) {
 
     // Iterate over all specified file groups.
     var data = _.union.apply(_, this.files.map(function (f) {
-      // Concat specified files.
+      var basePath = (function () {
+           return f.basePath ? f.basePath + '/' : ''; 
+         }());
 
-      console.log(f);
+      // Concat specified files.
       var mocks = _.union.apply(_, f.src.filter(function (filepath) {
+        filepath = basePath + filepath;
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -47,7 +79,6 @@ module.exports = function (grunt) {
       }).map(function (filepath) {
         var data;
         // Read file source.
-        // TODO: set absolute base path for response files
         if (/.json$/g.test(filepath)) {
           data = grunt.file.readJSON(filepath);
         } else {
@@ -58,7 +89,7 @@ module.exports = function (grunt) {
           data = [ data ];
         }
 
-        return data;
+        return setPathStaticFiles(basePath, data);
       }));
 
       return mocks;
@@ -77,7 +108,7 @@ module.exports = function (grunt) {
     // start stubby server
     stubbyServer.start(_.omit(options, 'callback'), function (error) {
       if (error) {
-        grunt.log.error('Stubby error: "' + error.message);
+        grunt.log.error('Stubby error: "' + error);
         done();
         return;
       }

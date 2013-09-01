@@ -32,15 +32,14 @@ module.exports = function(grunt) {
     stubby: {
       mockServer: {
         options: {
-          server: {
-            stubs: 8000,
-            tls: 8443,
-            admin: 8001
-          }
+          stubs: 8000,
+          tls: 8443,
+          admin: 8001
         },
-        files: {
-          '.': [ 'test/fixtures/*.{json,yaml}']
-        }
+        files: [{
+          src: [ 'test/fixtures/*.{json,yaml}' ],
+          basePath: '.'
+        }]
       }
     },
 

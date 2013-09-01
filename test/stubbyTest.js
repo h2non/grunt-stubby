@@ -15,7 +15,7 @@ exports.stubby = {
         if (err) {
           return test.done(err);
         }
-        test.deepEqual(res.body, { status: 'ok' });
+        test.deepEqual(res.body, { code: 200, type: 'file' });
         test.done();
       });
   },

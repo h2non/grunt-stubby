@@ -19,7 +19,7 @@
         "Access-Control-Allow-Origin": "*"
       },
       "latency": 500,
-      "body": "{ \"status\": \"ok\" }"
+      "file": "test/features/response.json"
     }
   }, 
   {
