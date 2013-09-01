@@ -129,8 +129,17 @@ Filename to monitor and load as stubby's data when changes occur
 Type: `Boolean`
 Default value: `true`
 
-Defaults to true. Pass in false to have console output (if available)
+Pass in false to have console output (if available)
 
+#### options.callback
+Type: `Function`
+Default value: `null`
+
+Callback function when the server starts successfully. 
+The passed arguments are:
+
+* `server` - The Stubby server instance object
+* `options` - The server config options object
 
 ## Contributing
 
