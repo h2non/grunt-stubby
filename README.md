@@ -6,7 +6,6 @@
 > A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) server based on YAML/JSON configuration files
 
 
-
 ## Getting Started
 
 This plugin requires Grunt `~0.4.1`
@@ -28,9 +27,6 @@ grunt.loadNpmTasks('grunt-stubby');
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. 
-
-By default
 
 ```js
 grunt.initConfig({
