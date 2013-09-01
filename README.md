@@ -31,7 +31,7 @@ By default
 grunt.initConfig({
   stubby: {
     stubsServer: {
-      // note the array collection instead of object
+      // note the array collection instead of an object
       files: [{
         src: [ 'mocks/*.{json,yaml}' ],
         basePath: 'test/'
@@ -58,7 +58,7 @@ grunt.initConfig({
         tls: 8443,
         admin: 8010
       },
-      // note the array collection instead of object
+      // note the array collection instead of an object
       files: [{
         src: [ 'mocks/*.{json,yaml}' ],
         basePath: 'test/'
@@ -138,6 +138,23 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 Add unit tests for any new or changed functionality. 
 Lint and test your code using [Grunt](http://gruntjs.com/).
+
+### Testing
+
+Clone the repository
+```shell
+$ git clone https://github.com/h2non/grunt-stubby.git && cd grunt-stubby
+```
+
+Install dependencies
+```shell
+$ npm install
+```
+
+Run tests
+```shell
+$ npm test
+``` 
 
 ## Release History
 
