@@ -168,7 +168,7 @@ $ npm test
 
 ## Release History
 
-* `0.1.0` 02.09.2013
+* `0.1.0` 01.09.2013
   - Initial release
 
 ## TODO
