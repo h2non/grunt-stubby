@@ -34,8 +34,7 @@ grunt.initConfig({
     stubsServer: {
       // note the array collection instead of an object
       files: [{
-        src: [ 'mocks/*.{json,yaml}' ],
-        basePath: 'test/'
+        src: [ 'mocks/*.{json,yaml}' ]
       }]
     }
   }
@@ -61,8 +60,7 @@ grunt.initConfig({
       },
       // note the array collection instead of an object
       files: [{
-        src: [ 'mocks/*.{json,yaml}' ],
-        basePath: 'test/'
+        src: [ 'mocks/*.{json,yaml}' ]
       }]
     }
   }
@@ -168,6 +166,8 @@ $ npm test
 
 ## Release History
 
+* `0.1.1` 09.05.2013
+  - Removed basePath files option
 * `0.1.0` 01.09.2013
   - Initial release
 

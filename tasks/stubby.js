@@ -9,14 +9,15 @@
 'use strict';
 
 var Stubby = require('stubby').Stubby;
+var path = require('path');
 
 module.exports = function (grunt) {
   var _ = grunt.util._;
 
   // defines the absolute path for external static request/response 
   // files that will be processed internally by Stubby
-  function setPathStaticFiles(basePath, array) {
-    array = array.map(function (object) {
+  function setPathStaticFiles(array, basePath) {
+    array = array.map(function (object) {     
       if (_.isObject(object.request) && object.request.file) {
         object.request.file = basePath + object.request.file;
       }
@@ -64,7 +65,7 @@ module.exports = function (grunt) {
     // Iterate over all specified file groups.
     var data = _.union.apply(_, this.files.map(function (f) {
       var basePath = (function () {
-           return f.basePath ? f.basePath + '/' : ''; 
+          return f.basePath ? path.normalize(f.basePath + '/') : ''; 
          }());
 
       // Concat specified files.
@@ -89,7 +90,7 @@ module.exports = function (grunt) {
           data = [ data ];
         }
 
-        return setPathStaticFiles(basePath, data);
+        return setPathStaticFiles(data, basePath);
       }));
 
       return mocks;
