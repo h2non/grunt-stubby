@@ -14,25 +14,25 @@ var path = require('path');
 module.exports = function (grunt) {
   var _ = grunt.util._;
 
-  // defines the absolute path for external static request/response 
+  // defines the absolute path for external static request/response
   // files that will be processed internally by Stubby
-  function setPathStaticFiles(array, basePath) {
-    array = array.map(function (object) {     
+  function setPathStaticFiles(array) {
+    array = array.map(function (object) {
       if (_.isObject(object.request) && object.request.file) {
-        object.request.file = basePath + object.request.file;
+        object.request.file = object.request.file;
       }
       if (_.isObject(object.response)) {
         // support collections for responses
         if (_.isArray(object.response)) {
           object.response = object.response.map(function (response) {
             if (response.file) {
-              response.file = basePath + response.file;
+              response.file = response.file;
             }
             return response;
           });
         } else {
           if (object.response.file) {
-            object.response.file = basePath + object.response.file;
+            object.response.file = object.response.file;
           }
         }
       }
@@ -41,6 +41,13 @@ module.exports = function (grunt) {
     });
 
     return array;
+  }
+
+  function getAbsolutePath(filepath) {
+    if (!grunt.file.isPathAbsolute(filepath)) {
+      filepath = process.cwd() + '/' + filepath;
+    }
+    return filepath;
   }
 
   grunt.registerMultiTask('stubby', 'A Grunt plugin for setting up a Stubby server based on YAML/JSON configuration files', function () {
@@ -64,13 +71,8 @@ module.exports = function (grunt) {
 
     // Iterate over all specified file groups.
     var data = _.union.apply(_, this.files.map(function (f) {
-      var basePath = (function () {
-          return f.basePath ? path.normalize(f.basePath + '/') : ''; 
-         }());
-
       // Concat specified files.
       var mocks = _.union.apply(_, f.src.filter(function (filepath) {
-        filepath = basePath + filepath;
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -79,18 +81,25 @@ module.exports = function (grunt) {
         return true;
       }).map(function (filepath) {
         var data;
+        filepath = getAbsolutePath(filepath);
         // Read file source.
-        if (/.json$/g.test(filepath)) {
-          data = grunt.file.readJSON(filepath);
-        } else {
+        if (/.yaml$/g.test(filepath)) {
           data = grunt.file.readYAML(filepath);
+        } else if (/.js$/g.test(filepath)) {
+          try {
+            data = require(filepath);
+          } catch (e) {
+            grunt.fail.fatal('Error while parsing JS file "' + filepath + '"', 1);
+          }
+        } else {
+          data = grunt.file.readJSON(filepath);
         }
 
         if (!_.isArray(data)) {
           data = [ data ];
         }
 
-        return setPathStaticFiles(data, basePath);
+        return setPathStaticFiles(data);
       }));
 
       return mocks;

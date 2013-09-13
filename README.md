@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/h2non/grunt-stubby.png)](https://travis-ci.org/h2non/grunt-stubby)
 [![Dependency Status](https://gemnasium.com/h2non/grunt-stubby.png)](https://gemnasium.com/h2non/grunt-stubby)
 
-> A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) server based on YAML/JSON configuration files
+> A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) mock server based on YAML/JSON7JS configuration files
 
 
 ## Getting Started
@@ -34,7 +34,7 @@ grunt.initConfig({
     stubsServer: {
       // note the array collection instead of an object
       files: [{
-        src: [ 'mocks/*.{json,yaml}' ]
+        src: [ 'mocks/*.{json,yaml,js}' ]
       }]
     }
   }
@@ -60,7 +60,7 @@ grunt.initConfig({
       },
       // note the array collection instead of an object
       files: [{
-        src: [ 'mocks/*.{json,yaml}' ]
+        src: [ 'mocks/*.{json,yaml,js}' ]
       }]
     }
   }
@@ -91,7 +91,7 @@ Port number to run the admin portal
 Type: `Number`
 Default value: `null`
 
-JavaScript Object/Array containing endpoint data. 
+JavaScript Object/Array containing endpoint data.
 This option will be automatically filled from the JSON/YAML config files, however you can additionally add a customized data
 
 #### options.location
@@ -134,7 +134,7 @@ Pass in false to have console output (if available)
 Type: `Function`
 Default value: `null`
 
-Callback function when the server starts successfully. 
+Callback function when the server starts successfully.
 The passed arguments are:
 
 * `server` - The Stubby server instance object
@@ -142,9 +142,9 @@ The passed arguments are:
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style. 
+In lieu of a formal styleguide, take care to maintain the existing coding style.
 
-Add unit tests for any new or changed functionality. 
+Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ### Testing
@@ -162,11 +162,14 @@ $ npm install
 Run tests
 ```shell
 $ npm test
-``` 
+```
 
 ## Release History
 
-* `0.1.1` 09.05.2013
+* `0.1.2` 13.09.2013
+  - Added support to JavaScript sources configuration files
+  - Detect and use full paths
+* `0.1.1` 09.09.2013
   - Removed basePath files option
 * `0.1.0` 01.09.2013
   - Initial release

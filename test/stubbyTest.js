@@ -51,5 +51,21 @@ exports.stubby = {
         test.equal(res.text, '<!xml blah="blah blah blah"> <responseXML>\n   <content></content>\n</responseXML>');
         test.done();
       });
+  },
+  'Test Towns endpoint': function (test) {
+    test.expect(1);
+    request('http://localhost:8000')
+      .get('/towns')
+      .set('Content-Type', 'application/json')
+      .expect(200)
+      .expect('Content-Type', 'application/json')
+      .expect('Access-Control-Allow-Origin', '*')
+      .end(function (err, res) {
+        if (err) {
+          return test.done(err);
+        }
+        test.deepEqual(res.body, require(__dirname + '/features/towns.json'));
+        test.done();
+      });
   }
 };

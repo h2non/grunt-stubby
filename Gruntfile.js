@@ -37,7 +37,7 @@ module.exports = function(grunt) {
           admin: 8001
         },
         files: [{
-          src: [ 'test/fixtures/*.{json,yaml}' ],
+          src: [ 'test/fixtures/*.{json,yaml,js}' ],
           basePath: '.'
         }]
       }
