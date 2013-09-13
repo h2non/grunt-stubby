@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/h2non/grunt-stubby.png)](https://travis-ci.org/h2non/grunt-stubby)
 [![Dependency Status](https://gemnasium.com/h2non/grunt-stubby.png)](https://gemnasium.com/h2non/grunt-stubby)
 
-> A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) mock server based on YAML/JSON7JS configuration files
+> A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) mock server based on YAML/JSON/JS configuration files
 
 
 ## Getting Started
