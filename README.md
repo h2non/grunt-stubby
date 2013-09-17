@@ -88,14 +88,14 @@ Default value: `8889`
 Port number to run the admin portal
 
 #### options.data
-Type: `Number`
+Type: `Array/Object`
 Default value: `null`
 
 JavaScript Object/Array containing endpoint data.
 This option will be automatically filled from the JSON/YAML config files, however you can additionally add a customized data
 
 #### options.location
-Type: `Number`
+Type: `String`
 Default value: `localhost`
 
 Address/hostname at which to run stubby
@@ -104,7 +104,7 @@ Address/hostname at which to run stubby
 Type: `String`
 Default value: `null`
 
-keyfile contents (in PEM format)
+Path to keyfile contents (in PEM format)
 
 #### options.cert
 Type: `String`
