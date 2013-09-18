@@ -100,6 +100,13 @@ Default value: `localhost`
 
 Address/hostname at which to run stubby
 
+#### options.relativeFilesPath
+Type: `Boolean`
+Default value: `false`
+
+When you use the 'file' property for the request/response config Objects, enabling this options
+the data file path is relative to the the config file where it has been declared.
+
 #### options.key
 Type: `String`
 Default value: `null`
@@ -166,6 +173,8 @@ $ npm test
 
 ## Release History
 
+* `0.1.3` 18.09.2013
+  - Added support to obtain relative paths from config file directory for the request/response data files
 * `0.1.2` 13.09.2013
   - Added support to JavaScript sources configuration files
   - Detect and use full paths

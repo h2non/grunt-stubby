@@ -16,23 +16,31 @@ module.exports = function (grunt) {
 
   // defines the absolute path for external static request/response
   // files that will be processed internally by Stubby
-  function setPathStaticFiles(array) {
+  function setPathStaticFiles(array, filepath) {
+    filepath = path.dirname(filepath);
+
+    function setAbsoluteFilePath(file) {
+      return filepath + '/' + file;
+    }
+
     array = array.map(function (object) {
       if (_.isObject(object.request) && object.request.file) {
-        object.request.file = object.request.file;
+        if (!grunt.file.isPathAbsolute(object.request.file)) {
+          object.request.file = setAbsoluteFilePath(object.request.file);
+        }
       }
       if (_.isObject(object.response)) {
         // support collections for responses
         if (_.isArray(object.response)) {
           object.response = object.response.map(function (response) {
-            if (response.file) {
-              response.file = response.file;
+            if (response.file && !grunt.file.isPathAbsolute(response.file)) {
+              response.file = setAbsoluteFilePath(response.file);
             }
             return response;
           });
         } else {
-          if (object.response.file) {
-            object.response.file = object.response.file;
+          if (object.response.file && !grunt.file.isPathAbsolute(object.response.file)) {
+            object.response.file = setAbsoluteFilePath(object.response.file);
           }
         }
       }
@@ -66,7 +74,8 @@ module.exports = function (grunt) {
       cert: null, // certificate file contents (in PEM format)
       pfx: null, // pfx file contents (mutually exclusive with key/cert options)
       watch: null, // filename to monitor and load as stubby's data when changes occur
-      mute: true // defaults to true. Pass in false to have console output (if available)
+      mute: true, // defaults to true. Pass in false to have console output (if available)
+      relativeFilesPath: false // if enabled, obtains the data mock file path relatively to the config file directory
     });
 
     // Iterate over all specified file groups.
@@ -99,7 +108,7 @@ module.exports = function (grunt) {
           data = [ data ];
         }
 
-        return setPathStaticFiles(data);
+        return options.relativeFilesPath ? setPathStaticFiles(data, filepath) : data;
       }));
 
       return mocks;
@@ -116,7 +125,7 @@ module.exports = function (grunt) {
     }
 
     // start stubby server
-    stubbyServer.start(_.omit(options, 'callback'), function (error) {
+    stubbyServer.start(_.omit(options, 'callback', 'relativeFilesPath'), function (error) {
       if (error) {
         grunt.log.error('Stubby error: "' + error);
         done();
