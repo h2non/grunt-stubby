@@ -43,6 +43,10 @@
   },
   "keywords": [
     "gruntplugin",
-    "stubby"
+    "stubby",
+    "mock",
+    "server",
+    "stubs",
+    "task"
   ]
 }
