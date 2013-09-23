@@ -1,7 +1,7 @@
 {
   "name": "grunt-stubby",
   "description": "A Grunt plugin for setting up a Stubby mock server based on YAML/JSON/JS configuration files",
-  "version": "0.2.4",
+  "version": "0.1.4",
   "homepage": "https://github.com/h2non/grunt-stubby",
   "author": {
     "name": "Tomas Aparicio",
