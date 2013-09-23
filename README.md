@@ -179,6 +179,8 @@ $ npm test
 
 ## Release History
 
+* `0.1.4` 23.09.2013
+  - Added persisten task option
 * `0.1.3` 18.09.2013
   - Added support to obtain relative paths from config file directory for the request/response data files
 * `0.1.2` 13.09.2013
