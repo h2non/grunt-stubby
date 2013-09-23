@@ -75,7 +75,8 @@ module.exports = function (grunt) {
       pfx: null, // pfx file contents (mutually exclusive with key/cert options)
       watch: null, // filename to monitor and load as stubby's data when changes occur
       mute: true, // defaults to true. Pass in false to have console output (if available)
-      relativeFilesPath: false // if enabled, obtains the data mock file path relatively to the config file directory
+      relativeFilesPath: false, // if enabled, obtains the data mock file path relatively to the config file directory
+      persistent: false // Run the task in a persistent server mode. Other tasks not will run until the Stubby server stops
     });
 
     // Iterate over all specified file groups.
@@ -125,7 +126,7 @@ module.exports = function (grunt) {
     }
 
     // start stubby server
-    stubbyServer.start(_.omit(options, 'callback', 'relativeFilesPath'), function (error) {
+    stubbyServer.start(_.omit(options, 'callback', 'relativeFilesPath', 'persistent'), function (error) {
       if (error) {
         grunt.log.error('Stubby error: "' + error);
         done();
@@ -140,7 +141,10 @@ module.exports = function (grunt) {
       grunt.log.writeln('Stubby HTTPS server listening on port ' + options.tls);
       grunt.log.writeln('Admin server listening on port ' + options.admin);
 
-      done();
+
+      if (!options.persistent) {
+        done();
+      }
 
     });
 

@@ -147,6 +147,12 @@ The passed arguments are:
 * `server` - The Stubby server instance object
 * `options` - The server config options object
 
+#### options.persistent
+Type: `Boolean`
+Default value: `false`
+
+Run the task in a persistent keep-alive server mode. Other tasks not will run until the Stubby server stops
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.

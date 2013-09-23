@@ -36,7 +36,8 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.1",
-    "supertest": "~0.7.1"
+    "supertest": "~0.7.1",
+    "grunt-release": "~0.5.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

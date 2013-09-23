@@ -37,8 +37,7 @@ module.exports = function(grunt) {
           admin: 8001
         },
         files: [{
-          src: [ 'test/fixtures/*.{json,yaml,js}' ],
-          basePath: '.'
+          src: [ 'test/fixtures/*.{json,yaml,js}' ]
         }]
       }
     },
@@ -46,7 +45,7 @@ module.exports = function(grunt) {
     // Unit tests.
     nodeunit: {
       tests: ['test/*Test.js'],
-    },
+    }
 
   });
 
@@ -57,6 +56,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-release');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
