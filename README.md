@@ -198,3 +198,7 @@ You miss something? Open an issue or PR!
 ## License
 
 Under [MIT](https://github.com/h2non/grunt-stubby/) license
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/grunt-stubby/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
