@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/h2non/grunt-stubby.png)](https://travis-ci.org/h2non/grunt-stubby)
 [![Dependency Status](https://gemnasium.com/h2non/grunt-stubby.png)](https://gemnasium.com/h2non/grunt-stubby)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/grunt-stubby/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 > A Grunt plugin for setting up a [Stubby](https://github.com/mrak/stubby4node) mock server based on YAML/JSON/JS configuration files
 
@@ -198,7 +199,3 @@ You miss something? Open an issue or PR!
 ## License
 
 Under [MIT](https://github.com/h2non/grunt-stubby/) license
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/grunt-stubby/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
