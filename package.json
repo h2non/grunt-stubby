@@ -29,14 +29,14 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "stubby": "~0.2.0"
+    "stubby": "~0.3.1"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.1",
-    "supertest": "~0.7.1",
+    "supertest": "~1.2.0",
     "grunt-release": "~0.5.1"
   },
   "peerDependencies": {
