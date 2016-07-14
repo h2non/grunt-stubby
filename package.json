@@ -29,7 +29,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "stubby": "~0.3.0"
+    "stubby": "~0.3.1"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
